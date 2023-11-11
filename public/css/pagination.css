@@ -1,0 +1,52 @@
+/* Định nghĩa style chung cho phần tử li trong phân trang */
+.pagination li {
+    display: inline-block; /* Hiển thị các nút phân trang trên cùng một dòng */
+    margin-right: 4px; /* Thêm khoảng cách giữa các nút */
+}
+
+/* Style cho các liên kết trong phân trang */
+.pagination a {
+    text-decoration: none; /* Xóa gạch dưới các liên kết */
+    color: #007bff; /* Màu cho liên kết */
+    background-color: #fff; /* Màu nền */
+    border: 1px solid #dee2e6; /* Viền xung quanh */
+    padding: 0.5rem 0.75rem; /* Padding cho liên kết để tạo ra kích thước nút */
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out; /* Hiệu ứng chuyển đổi khi hover hoặc focus */
+}
+
+/* Thêm hiệu ứng khi hover vào liên kết */
+.pagination a:hover {
+    color: #0056b3; /* Thay đổi màu của text khi hover */
+    background-color: #e9ecef; /* Thay đổi màu nền khi hover */
+    border-color: #dee2e6; /* Thay đổi màu viền khi hover */
+}
+
+/* Style cho liên kết của trang hiện tại */
+.pagination .active a {
+    color: #fff; /* Màu của text cho trang hiện tại */
+    background-color: #007bff; /* Màu nền cho trang hiện tại */
+    border-color: #007bff; /* Màu viền cho trang hiện tại */
+}
+
+/* Style cho disabled link (không có liên kết) */
+.pagination .disabled a {
+    color: #6c757d; /* Màu cho text khi disabled */
+    pointer-events: none; /* Vô hiệu hóa sự kiện chuột */
+    background-color: #fff; /* Màu nền cho trang disabled */
+    border-color: #dee2e6; /* Màu viền cho trang disabled */
+}
+.custom-select {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #333;
+}
+
+.custom-select:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 4px rgba(33, 150, 243, 0.5);
+    outline: none;
+}
