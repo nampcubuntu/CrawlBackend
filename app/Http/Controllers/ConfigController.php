@@ -279,8 +279,6 @@ class ConfigController extends Controller
 
     public function getConfigTableInfo($config, $url,$options = [])
     {
-  
-       
             $producttitlexpath =  $config->producttitlexpath;
             $productpricexpath =  $config->productpricexpath;
             $productdiscountpricexpath =  $config->productdiscountpricexpath;
@@ -292,7 +290,7 @@ class ConfigController extends Controller
             $productdescriptionxpath =  $config->productdescriptionxpath;
             $xp = $this->gx($url,$options);
   
-            if ($xp['httpcode'] == 200) {
+            if (isset($xp['httpcode']) && $xp['httpcode'] == 200) {
                 $title = $this->gxv($xp, $producttitlexpath)[0];
                 $price = $this->gxv($xp, $productpricexpath)[0];
                 $promo = $this->gxv($xp, $productdiscountpricexpath)[0];
