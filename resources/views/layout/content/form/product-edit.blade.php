@@ -34,13 +34,18 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-12 pl-0">
+                            <div class="col-sm-8 pl-0">
                                 <p class="text-right">
-                                    <button type="button" id="update" class="btn btn-space btn-primary">Save</button>
+                                    <button type="button" onclick="rematchedProduct()"style="background-color: orange; border-color: orange; color: white;" class="btn btn-space btn-orange">Automatic</button>
+                                </p>
+                            </div>
+                            <div class="col-sm-4 pl-0">
+                                <p class="text-right">
+                                    <button type="button" onclick="updateProduct()" class="btn btn-primary">Save</button>
                                 </p>
                             </div>
                         </div>
-
+                      
                         <form action="#" id="editshopform" data-parsley-validate="">
                             <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}" />
                             <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}" />
@@ -61,7 +66,7 @@
                                 <input id="shippingcost" type="text" name="shippingcost" value="{{ $product->shippingcost }}" data-parsley-trigger="change" required="" autocomplete="off" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="admin_form_brand">Reference</label>
+                                <label for="admin_form_brand">Brand</label>
                                 <input id="brand" type="text" name="brand" value="{{ $product->brand }}" data-parsley-trigger="change" required="" autocomplete="off" class="form-control">
                             </div>
 
@@ -79,23 +84,20 @@
                             </div>
                             <div class="form-group">
                                 <label for="admin_form_imageurl">Image URL</label>
-                                <input id="productimageurlxpath" type="text" name="productimageurlxpath" value="{{ $product->productimageurlxpath }}" data-parsley-trigger="change" required="" autocomplete="off" class="form-control">
+                                <input id="imageurl" type="text" name="imageurl" value="{{ $product->imageurl }}" data-parsley-trigger="change" required="" autocomplete="off" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="admin_form_available">Available</label>
                                 <input id="available" type="text" name="available" value="{{ $product->available }}" data-parsley-trigger="change" required="" autocomplete="off" class="form-control">
                             </div>
-                            
                             <div class="form-group">
-                                <label for="admin_form_description">Description</label>
-                                <input id="description" type="text" name="description" value="{{ $product->description }}" data-parsley-trigger="change" required="" autocomplete="off" class="form-control">
+                                <label for="admin_form_spec">Spec</label>
+                                <input id="spec" type="text" name="spec" value="{{ $product->spec }}" data-parsley-trigger="change" required="" autocomplete="off" class="form-control">
                             </div>
-
-                            <div class="row">
-                                <div style="margin-bottom: 2px;" class="col-sm-12 pl-0">
-                                    <p class="text-right">
-                                        <button type="button" id="crawlers" class="btn btn-space btn-secondary">Crawlers</button>
-                                    </p>
+                            <div class="form-group">
+                                <div id="editor" style="width: 100%;">
+                                    <label for="admin_form_description">Description</label>
+                                    <textarea id="description"  class="form-control" name="description" rows="10" cols="100">{{ $product->description }}</textarea>
                                 </div>
                             </div>
                         </form>
@@ -120,5 +122,6 @@
 </div>
 
 @include('layout.footer.footer')
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 <script src="{{ asset('handle/productEditor.js') }}"></script>
 @endsection

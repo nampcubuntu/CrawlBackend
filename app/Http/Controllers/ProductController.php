@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Config;
 use App\Models\Product;
+use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -76,9 +77,38 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function show($id)
     {
-        //
+        try {
+            $product = Product::findOrFail($id);
+            return response()->json(['product'=>$product],200,['message'=>'Lấy sản phẩm thành công']);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            Log::error("ERROR: Không tìm thấy sản phẩm");
+        }
+    }
+
+    public function update(Request $request,$id){
+    
+        try {
+            $product = Product::findOrFail($id);
+            $product->title = $request->input('title');
+            $product->price = $request->input('price');
+            $product->promo = $request->input('promo');
+            $product->shippingcost = $request->input('shippingcost');
+            $product->brand = $request->input('brand');
+            $product->reference = $request->input('reference');
+            $product->mpn = $request->input('mpn');
+            $product->ean = $request->input('ean');
+            $product->imageurl = $request->input('imageurl');
+            $product->available = $request->input('available');
+            $product->spec = $request->input('spec');
+            $product->description = $request->input('description');
+            $product->save();
+
+            return response()->json(['product'=>$product],200,['message'=>'Cập nhật sản phẩm thành công']);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            Log::error("ERROR: Không tìm thấy sản phẩm");
+        }
     }
 
     /**
@@ -86,6 +116,11 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            Product::destroy($id);
+            return response()->json(['message' => 'Product delete successfully !'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to delete config', 'message' => $e->getMessage()], 500);
+        }
     }
 }

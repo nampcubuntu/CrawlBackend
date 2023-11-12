@@ -24,6 +24,7 @@ return new class extends Migration
             $table->text('ean')->nullable();
             $table->longText('imageurl')->nullable();
             $table->text('available')->nullable();
+            $table->text('spec')->nullable();
             $table->longText('description')->nullable();
             $table->unsignedBigInteger('config_id');
             $table->foreign('config_id')->references('id')->on('configs');

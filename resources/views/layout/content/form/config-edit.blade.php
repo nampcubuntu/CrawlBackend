@@ -86,7 +86,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="admin_form_hookcode">Hook code</label>
-                                <textarea style="height: 300px;color:black" id="textareaHookcode" type="text" name="textareaHookcode" data-parsley-trigger="change" required="" autocomplete="off" class="form-control">{{ $config->textareaHookcode }}</textarea>
+                                <textarea style="height: 300px;color:black" id="textareaHookcode" type="text" name="textareaHookcode" data-parsley-trigger="change" required="" autocomplete="off" class="form-control code-textarea code-editor">{{ $config->textareaHookcode }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="admin_form_title">Title</label>
@@ -134,7 +134,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="admin_form_hookcode">Agent</label>
-                                <textarea style="height: 300px;color:black" id="agentHookcode" type="text" name="agentHookcode" data-parsley-trigger="change" required="" autocomplete="off" class="form-control">{{ $config->agentHookcode }}</textarea>
+                                <textarea style="height: 300px;color:black" id="agentHookcode" type="text" name="agentHookcode" data-parsley-trigger="change" required="" autocomplete="off" class="form-control code-textarea">{{ $config->agentHookcode }}</textarea>
                             </div>
                         </form>
                     </div>

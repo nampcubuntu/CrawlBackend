@@ -23,6 +23,7 @@ class Product extends Model
         'imageurl',
         'available',
         'description',
+        'spec',
         'config_id',
     ];
 

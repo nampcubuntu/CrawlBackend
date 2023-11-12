@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('mpn')->nullable();
             $table->text('ean')->nullable();
             $table->text('available')->nullable();
+            $table->text('spec')->nullable();
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();

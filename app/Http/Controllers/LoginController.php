@@ -3,21 +3,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class LoginController extends Controller
 {
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-    
-        if (Auth::attempt($credentials,$remember = true)) {
+        $validatedData = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+        
+        // Sử dụng dữ liệu đã được xác thực
+        $credentials = [
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password']
+        ];
+        
+        $remember = true; // hoặc dựa trên một input từ form, ví dụ: $request->has('remember')
+        if (Auth::attempt($credentials, $remember)) {
             // Authentication was successful
-            return redirect()->intended('admin/dashboards-analytics');
+            return redirect()->intended('/admin/dashboards-analytics');
         } else {
             // Authentication failed
             return back()->withErrors(['email' => 'Thông tin đăng nhập không hợp lệ']);
         }
+        
     }
     
     /**
@@ -25,7 +37,15 @@ class LoginController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::check()){  
+            if (Gate::allows('is-admin')) {
+                    return redirect('/admin/dashboards-analytics');
+            } else {
+                return view('welcome');
+            }
+        }else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -39,11 +59,14 @@ class LoginController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
+    public function logout()
+    {
+        Auth::logout();
+
+        return view('welcome');
+    }
+  
     /**
      * Display the specified resource.
      */

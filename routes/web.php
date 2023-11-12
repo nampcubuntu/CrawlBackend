@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ConfigController;
-use App\Http\Controllers\DomainController;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -19,14 +18,11 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 Route::post('/login', [LoginController::class, 'login']);
+Route::get('/', [LoginController::class, 'index']);
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/dashboards-analytics', [AdminController::class, 'dashboardsAnalytics']);
     Route::get('/general-tables', [AdminController::class, 'generalTables']);
     Route::get('/config-tables', [AdminController::class, 'configTables']);
@@ -47,5 +43,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/products/{id}', [ProductController::class, 'index']);
     Route::get('/product/{id}/edit', [ProductController::class, 'edit']);
     Route::put('/rematched-product/{id}', [ProductController::class, 'rematchedProduct']);
+    Route::get('/product/{id}/show', [ProductController::class, 'show']);
+    Route::put('/product/{id}/update', [ProductController::class, 'update']);
+    Route::delete('/product/{id}/delete', [ProductController::class, 'destroy']);
 });
 

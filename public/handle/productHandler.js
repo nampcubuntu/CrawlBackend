@@ -43,7 +43,7 @@ function getAndDisplayProductList(pageNumber = null,config_id) {
                         </td>
                         <td>
                             <a class="action-icon" href="/admin/product/${products[i].id}/edit"><i class="fa fa-edit" style="color:blue"></i></a>
-                            <a class="action-icon" href="#"><i class="fa fa-trash" style="color:red"></i></a>
+                            <a class="action-icon" href="#" onclick="deleteProduct(event,${products[i].id})"><i class="fa fa-trash" style="color:red"></i></a>
                             <a class="action-icon" href="#" onclick="rematchedProduct(event,${products[i].id})"><i class="fas fa-sync" style="color:green"></i></a>      
                         </td>
                     </tr>
@@ -152,7 +152,7 @@ function rematchedProduct(event,id){
                 showConfirmButton: false, 
                 timer: 800 
             });
-
+            dropdownConfig();
         },
         error: function (xhr, status, error) {
             Swal.fire({
@@ -164,6 +164,54 @@ function rematchedProduct(event,id){
         }
     });
     
+}
+
+const deleteProduct = (event,id) =>{
+    event.preventDefault();
+    console.log(id);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let csrfToken = $('meta[name="csrf-token"]').attr('content');
+            let requestData = {
+                _token: csrfToken
+            };
+            $.ajax({
+                type: "DELETE",
+                url: "/admin/product/" + id + "/delete",
+                data: requestData,
+                success: function (response) {
+                    dropdownConfig();
+                    $("#configModal").modal("hide");
+                    resetModal();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'success',
+                        showConfirmButton: false,
+                        timer: 800 
+                    });
+
+                },
+                error: function (xhr, status, error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'error',
+                        showConfirmButton: false, 
+                        timer: 1500 
+                    });
+                }
+            });
+        }
+    });
+   
 }
 
 function init() {

@@ -9,4 +9,17 @@ class Variant extends Model
 {
     use HasFactory;
     public $timestamps = true;
+    protected $fillable = [
+        'url',
+        'title',
+        'price',
+        'promo',
+        'shippingcost',
+        'reference',
+        'mpn',
+        'ean',
+        'available',
+        'spec',
+        'config_id',
+    ];
 }

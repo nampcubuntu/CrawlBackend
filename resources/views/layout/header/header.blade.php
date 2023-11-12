@@ -11,20 +11,36 @@
     <link rel="stylesheet" href="{{ asset('assets/libs/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/fontawesome/css/fontawesome-all.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
     <style>
-        #product-add{
+        #product-add {
             margin-bottom: 20px;
         }
-        .action-icon{ 
+
+        .action-icon {
             margin-left: 10px;
-            font-size:18px;
+            font-size: 18px;
         }
+
         textarea {
             letter-spacing: 3px;
             font-family: Arial, sans-serif;
             font-weight: 200;
         }
 
+        .code-textarea {
+            width: 100%;
+            height: 400px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.5;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+            overflow: auto;
+            background-color: #f4f4f4;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 10px;
+            tab-size: 4;
+        } 
     </style>
 </head>

@@ -9,7 +9,7 @@ function loadConfigData() {
             if (response !== null && response !== undefined) {
                 var productInfo = $("#productInfo");
                 productInfo.empty();
-       
+
                 let products = response.configs;
 
                 for (var j = 0; j < products.length; j++) {
@@ -81,7 +81,7 @@ function loadConfigData() {
                             </table>
                         </div>`;
 
-               
+
 
                     if (products[j] && products[j].prices) {
                         let variantTableHTML = ` <div class="variant-info"><table class="table table-bordered">`;
@@ -98,17 +98,17 @@ function loadConfigData() {
                                     <td>${products[j].availables[index]}</td>
                                 </tr>`;
                         });
-    
+
                         variantTableHTML += `</table></div>`;
                         productHTML += variantTableHTML;
                     } else {
                         console.log("ko có biến thể");
                     }
                     containerHTML += productHTML;
-                    containerHTML +=`</div></div></div>`;
+                    containerHTML += `</div></div></div>`;
                     // Thêm HTML sản phẩm vào DOM
                     productInfo.append(containerHTML);
-                 
+
                 }
             }
 
@@ -172,24 +172,24 @@ function updateConfig() {
 
         $.ajax({
             type: "PUT",
-            url: "/admin/update-config/" + config_id, 
-            data: requestData, 
+            url: "/admin/update-config/" + config_id,
+            data: requestData,
             success: function (response) {
                 loadConfigData();
                 Swal.fire({
-                    icon: 'success', 
+                    icon: 'success',
                     title: 'success',
-                    showConfirmButton: false, 
-                    timer: 800 
+                    showConfirmButton: false,
+                    timer: 800
                 });
 
             },
             error: function (xhr, status, error) {
                 Swal.fire({
-                    icon: 'error', 
+                    icon: 'error',
                     title: 'error',
                     showConfirmButton: false,
-                    timer: 1500 
+                    timer: 1500
                 });
             }
         });
@@ -214,15 +214,15 @@ function agentHookCode() {
         };
 
         $.ajax({
-            type: "POST", 
-            url: "/admin/agent-hook-code", 
-            data: requestData, 
+            type: "POST",
+            url: "/admin/agent-hook-code",
+            data: requestData,
             success: function (response) {
                 console.log(response);
             },
             error: function (xhr, status, error) {
                 Swal.fire({
-                    icon: 'error', 
+                    icon: 'error',
                     title: 'error',
                     showConfirmButton: false,
                     timer: 1500
